@@ -30,6 +30,19 @@ def vecAdd(vh):
             ANS[j] += vector[j]
     return ANS
 
+def vecMultiply(vh, sf):
+    ANS = vh[0][:]
+    for item in range(len(vh)):
+        ANS[item] = ANS[item]*sf
+    return ANS
+
+def crossproduct(v1, v2):
+    ANS = [0, 0, 0]
+    ANS[0] = v2[1]*v1[2] - v2[2]*v1[1]
+    ANS[1] = v2[2]*v1[0] - v2[0]*v1[2]
+    ANS[2] = v2[0]*v1[1] - v2[1]-v1[0]
+    return ANS
+
 optype1 = input("Vector or Matrix operation?_").lower()
 
 if optype1 == "vector" or "v" or "vec":
@@ -44,11 +57,25 @@ if optype1 == "vector" or "v" or "vec":
         print("stored!")
     print("So your vectors are: " + str(vectorholder))
 
-
     
-    optype2 = input("Addition, subtraction?_").lower()
+    optype2 = input("Addition, subtraction, multiplication (scalar), or cross product?_").lower()
     if optype2 in ["add", "addition", "a"]:
         print(vecAdd(vectorholder))
     elif optype2 in ["sub", "subtraction", "s"]:
         print(vecSubtract(vectorholder))
+    elif optype2 in ["m", "mult", "multiplication"]:
+        scale = float(input("Scale in decimal?_"))
+        print(vecMultiply(vectorholder, scale))
+    elif optype2 in ["c", "cross", "cross product", "cp"]:
+        if varnumber == 2:
+            print(crossproduct(vectorholder[0], vectorholder[1]))
+        else:
+            vholder2 = []
+            v1 = input("Enter numbers of your vector (no spaces)_")
+            v1out = [int(char) for char in vectorin]
+            vholder2.append(v1out) # store the vector in holder
+            v2 = input("Enter numbers of your vector (no spaces)_")
+            v2out = [int(char) for char in vectorin]
+            vholder2.append(v2out) # store the vector in holder
+            print(crossproduct(vholder2[0], vholder2[1]))
 
